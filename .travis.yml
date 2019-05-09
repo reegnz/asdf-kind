@@ -1,0 +1,11 @@
+language: c
+before_script:
+  - git clone https://github.com/asdf-vm/asdf.git
+  - . asdf/asdf.sh
+script: 
+  - asdf plugin-add kind ./
+  - asdf list-all kind
+  - asdf plugin-test kind ./ 'kind help' || exit 1
+os:
+  - linux
+  - osx
