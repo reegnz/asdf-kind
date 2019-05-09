@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e
+set -o pipefail
+
+install() {
+    version=$2
+    install_path=$3
+    bin_path=${install_path}/bin/kind
+    platform=$(uname | tr [:upper:] [:lower:])
+    arch=amd64
+    filename=kind-${platform}-${arch}
+    github_base_url=https://github.com/kubernetes-sigs/kind/releases/download
+    download_url="${github_base_url}/${version}/${filename}"
+    echo "Downloading kind from $download_url"
+    mkdir $(dirname ${bin_path})
+    curl -s -L ${download_url} -o ${bin_path}
+    chmod +x ${bin_path}
+
+}
+
+install "${ASDF_INSTALL_TYPE}" "${ASDF_INSTALL_VERSION}" "${ASDF_INSTALL_PATH}"
