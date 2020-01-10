@@ -10,7 +10,7 @@ install() {
     arch=amd64
     filename=kind-${platform}-${arch}
     github_base_url=https://github.com/kubernetes-sigs/kind/releases/download
-    download_url="${github_base_url}/${version}/${filename}"
+    download_url="${github_base_url}/v${version}/${filename}"
     echo "Downloading kind from $download_url"
     mkdir $(dirname ${bin_path})
     curl -s -L ${download_url} -o ${bin_path}
