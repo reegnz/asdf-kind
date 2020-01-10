@@ -9,6 +9,6 @@ Installation
 ------------
 ```
 asdf plugin-add kind https://github.com/reegnz/asdf-kind.git
-asdf install kind 0.2.1
-asdf global kind 0.2.1
+asdf install kind 0.6.1
+asdf global kind 0.6.1
 ```
