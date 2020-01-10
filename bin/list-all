@@ -7,7 +7,7 @@ if [ -n "$OAUTH_TOKEN" ]; then
     cmd="$cmd -H 'Authorization: token $OAUTH_TOKEN'";
 fi
 cmd="$cmd $releases_path";
-list_of_versions=$($cmd | sed -n -e 's/.*"tag_name".*:.*"\(.*\)",$/\1/p' | sort -V | tail -n+2 )
+list_of_versions=$($cmd | sed -n -e 's/.*"tag_name".*:.*"v\(.*\)",$/\1/p' | sort -V | tail -n+2 )
 for version in $list_of_versions; do
     versions+=("$version");
 done
