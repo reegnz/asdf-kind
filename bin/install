@@ -2,12 +2,27 @@
 set -e
 set -o pipefail
 
+get_arch() {
+  local arch=""
+
+  case "$(uname -m)" in
+    x86_64 | amd64) arch="amd64" ;;
+    i686 | i386) arch="386" ;;
+    aarch64 | arm64) arch="arm64" ;;
+    *)
+      fail "Arch '$(uname -m)' not supported!"
+      ;;
+  esac
+
+  echo -n $arch
+}
+
 install() {
     version=$2
     install_path=$3
     bin_path=${install_path}/bin/kind
     platform=$(uname | tr [:upper:] [:lower:])
-    arch=amd64
+    arch=$(get_arch)
     filename=kind-${platform}-${arch}
     github_base_url=https://github.com/kubernetes-sigs/kind/releases/download
     download_url="${github_base_url}/v${version}/${filename}"
